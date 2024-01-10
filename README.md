@@ -15,7 +15,8 @@ MinaSegura/
 ├── src/ # Folder with .puml source files
 │ └── *.puml
 │
-└── output/ # Folder for the generated diagrams
+├── output/ # Folder for the generated diagrams
+|
 plantuml.jar # PlantUML JAR File
 ```
 
