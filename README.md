@@ -9,7 +9,6 @@ La estructura del proyecto es la siguiente:
 ```Esqueleto
 MinaSegura/
 │
-├── plantuml.jar # Archivo JAR de PlantUML
 │
 ├── execute.bat # Script para generar diagramas UML
 │
@@ -17,6 +16,8 @@ MinaSegura/
 │ └── *.puml
 │
 └── output/ # Carpeta para los diagramas generados
+plantuml.jar # Archivo JAR de PlantUML
+
 ```
 
 ## Requisitos
