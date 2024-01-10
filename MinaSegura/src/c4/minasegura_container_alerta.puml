@@ -1,0 +1,28 @@
+@startuml minasegura_container_alerta
+!include <C4/C4_Container>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama del contenedor sistema de alerta
+
+System(django_app, "Sistema MinaSegura", "Aplicacion web para registro y monitoreo de datos de la mina")
+
+System_Boundary(c1, "Sistema Alerta") {
+    Container(alerta_api, "Apigateway Alerta", "AWS Apigateway", "API para gestion de alertas y umbrales")
+    Container(alerta_lambda, "Lambda Alerta", "Amazon Lambda Python", "Funcion lambda para analisis de mediciones y notificacion de alertas")
+    Container(alerta_config_lambda, "Lambda Alerta Configuracion", "Amazon Lambda Python", "Funcion lambda para gestion de configuracion de alertas")
+    ContainerDb(alerta_db, "Tabla Alerta", "DynamoDB", "Base de datos para alertas de mediciones")
+    ContainerDb(alerta_config_db, "Tabla Alerta Configuracion", "DynamoDB", "Base de datos para configuracion de umbrales")
+
+}
+ContainerQueue_Ext(sqs, "Cola de mensajes", "AWS SQS", "Gestiona la comunicacion de eventos entre lambdas del sistema")
+
+Rel_R(django_app, alerta_api, "Consume", "HTTPS")
+Rel(alerta_api, alerta_lambda, "Consume", "HTTPS")
+Rel(alerta_api, alerta_config_lambda, "Consume", "HTTPS")
+Rel_D(alerta_lambda, alerta_db, "Lee y escribe", "SDK")
+Rel_D(alerta_config_lambda, alerta_config_db, "Lee y escribe", "SDK")
+
+Rel_(alerta_lambda, sqs, "Produce y consume", "<-LEFT->")
+
+@enduml

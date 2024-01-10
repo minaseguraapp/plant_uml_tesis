@@ -1,2 +1,3 @@
 @ECHO OFF
-java -jar ../plantuml.jar src/*.puml -o "../output"
+CD ..
+java -jar plantuml.jar "MinaSegura/src/**.puml" -o "../../output/"

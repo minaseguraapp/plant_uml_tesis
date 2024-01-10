@@ -1,21 +1,31 @@
 @startuml minasegura_context
-!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
-!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
-
 !include <C4/C4_Context>
 
 LAYOUT_WITH_LEGEND()
 
-
-title Diagrama del contexto del sistema para el aplicativo MinaSegura
+title Diagrama del contexto del sistema MinaSegura
 
 Person(encargado_mina, "Encargado", "Encargado de la mina")
 Person(admin, "Administrador", "Administrador del sistema Mina Segura")
-System(minasegura, "MinaSegura", "Aplicativo que ayuda a la prevencion de explosiones de gas metano y polvo de carbon")
-System_Ext(notification, "Sistema de notificaciones", "Sistema de notificaciones gestionado por AWS")
 
-Rel_D(encargado_mina, minasegura, "Administra la seguridad de la mina usando")
-Rel_D(admin, minasegura, "Configura los parametros de las minas y sus zonas a traves de")
-Rel_R(minasegura, notification, "Usa")
+Enterprise_Boundary(c0, "MinaSegura") {
+
+System(django_app, "Sistema MinaSegura", "Aplicacion web para registro y monitoreo de datos de la mina")
+System(medicion_api, "Sistema Medicion", "API para registro de datos de polvo de carbon y gas metano")
+System(alerta_api, "Sistema Alerta",  "API para gestion de alertas por niveles altos de gases")
+System(notificacion_api, "Sistema Notificacion", "API para envio de notificaciones SMS a encargados")
+}
+System_Ext(notification, "Sistema de notificaciones", "Servicio externo para manejo de notificaciones")
+
+Rel(encargado_mina, django_app, "Interactua")
+Rel(admin, django_app, "Interactua")
+
+Rel(django_app, medicion_api, "Se comunica a traves de", "HTTPS")
+Rel(django_app, alerta_api, "Se comunica a traves de", "HTTPS")
+Rel(django_app, notificacion_api, "Se comunica a traves de", "HTTPS")
+
+Rel_R(medicion_api, alerta_api, "Envia eventos", "Cola de mensajes")
+Rel_R(alerta_api, notificacion_api, "Envia eventos", "Cola de mensajes")
+Rel(notificacion_api, notification, "Usa", "SDK")
 
 @enduml

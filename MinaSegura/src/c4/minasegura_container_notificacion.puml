@@ -1,0 +1,27 @@
+@startuml minasegura_container_notificacion
+!include <C4/C4_Container>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama del contenedor sistema de notificacion
+
+System(django_app, "Sistema MinaSegura", "Aplicacion web para registro y monitoreo de datos de la mina")
+
+System_Boundary(c1, "Sistema Notificacion") {
+    Container(notificacion_api, "Apigateway Notificacion", "AWS Apigateway", "Interfaz REST para consulta de configuracion de notificaciones")
+    Container(notificacion_lambda, "Lambda Notificacion", "Amazon Lambda Python", "Funcion para enviar notificaciones SMS a encargados de la mina")
+    Container(notificacion_config_lambda, "Lambda Configuracion Notificacion", "Amazon Lambda Python", "Funcion para administrar las configuraciones de notificacion")
+    ContainerDb(notificacion_config_db, "Tabla Configuracion Notificacion", "DynamoDB", "Base de datos para almacenar las configuraciones de las mediciones")
+    
+}
+ContainerQueue_Ext(sqs, "Cola de mensajes", "AWS SQS", "Gestiona eventos entre funciones lambda del sistema")
+System_Ext(sns, "Sistema de notificaciones", "Servicio externo para manejo de notificaciones")
+
+Rel(django_app, notificacion_api, "Consume", "HTTPS")
+Rel(notificacion_api, notificacion_config_lambda, "Consume", "HTTPS")
+Rel_L(notificacion_config_lambda, notificacion_config_db, "Lee y escribe", "SDK")
+Rel_(notificacion_lambda, sqs, "Invoca", "SDK", "<-UP-")
+Rel_L(notificacion_lambda, sns, "consume", "SDK")
+
+
+@enduml

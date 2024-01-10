@@ -1,0 +1,28 @@
+@startuml minasegura_container_web
+!include <C4/C4_Container>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama del contenedor sistema MinaSegura
+
+Person(encargado_mina, "Encargado", "Encargado de la mina")
+Person(admin, "Administrador", "Administrador del sistema Mina Segura")
+
+System_Boundary(c1, "Sistema MinaSegura") {
+    Container(web_api, "Apigateway Web", "AWS Apigateway", "Interfaz REST que recibe todas las solicitudes HTTP")
+    Container(web_lambda, "MinaSegura Web Application", "Django App", "Aplicacion web que gestiona las mediciones, mantenimiento y administracion de la mina")
+    Container(web_db, "Database", "Postgresql", "Base de datos para almacenar informacion de la mina y mantenimientos de equipos")
+}
+Container_Ext(private_api_medicion, "Apigateway Medicion", "AWS Apigateway", "Interfaz REST para registro y consulta de mediciones de polvo y gas")
+Container_Ext(private_api_alertas, "Apigateway Alertas", "AWS Apigateway", "Interfaz REST para gestion de alertas y umbrales")
+Container_Ext(private_api_notificacion, "Apigateway Notificacion", "AWS Apigateway", "Interfaz REST para consulta de configuracion de notificaciones")
+
+Rel_R(encargado_mina, web_api, "Consume", "HTTPS")
+Rel_R(admin, web_api, "Consume", "HTTPS")
+Rel(web_api, web_lambda, "Consume", "HTTPS")
+Rel_L(web_lambda, web_db, "Lee y escribe", "SDK")
+Rel(web_lambda, private_api_medicion, "Produce eventos", "SDK")
+Rel(web_lambda, private_api_alertas, "Produce eventos", "SDK")
+Rel(web_lambda, private_api_notificacion, "Produce eventos", "SDK")
+
+@enduml

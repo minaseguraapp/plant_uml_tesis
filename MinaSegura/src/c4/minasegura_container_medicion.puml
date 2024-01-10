@@ -1,0 +1,22 @@
+@startuml minasegura_container_medicion
+!include <C4/C4_Container>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama del contenedor sistema de medicion
+
+System(django_app, "Sistema MinaSegura", "Aplicacion web para registro y monitoreo de datos de la mina")
+
+System_Boundary(c1, "Sistema Medicion") {
+    Container(medicion_api, "Apigateway Medicion", "AWS Apigateway", "Interfaz REST para registro y consulta de mediciones de polvo y gas")
+    Container(medicion_lambda, "Lambda Medicion", "Amazon Lambda Python", "Funcion para procesar mediciones y consultarlas")
+    ContainerDb(medicion_db, "Tabla Medicion", "DynamoDB", "Base de datos para almacenar mediciones de polvo y gas en minas")
+}
+ContainerQueue_Ext(sqs, "Cola de mensajes", "AWS SQS", "Gestiona eventos entre funciones lambda del sistema")
+
+Rel(django_app, medicion_api, "Consume", "HTTPS")
+Rel_R(medicion_api, medicion_lambda, "Consume", "HTTPS")
+Rel_D(medicion_lambda, medicion_db, "Lee y escribe", "SDK")
+Rel_R(medicion_lambda, sqs, "Produce eventos", "SDK")
+
+@enduml
