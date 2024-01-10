@@ -1,52 +1,77 @@
-# Proyecto MinaSegura con PlantUML
+# MinaSegura Project with PlantUML
 
-Este proyecto utiliza PlantUML para la generación de diagramas UML a partir de archivos `.puml`.
+This project utilizes PlantUML for generating UML diagrams from `.puml` files.
 
-## Estructura del Proyecto
+## Project Structure
 
-La estructura del proyecto es la siguiente:
+The structure of the project is as follows:
 
-```Esqueleto
+```Skeleton
 MinaSegura/
 │
 │
-├── execute.bat # Script para generar diagramas UML
+├── execute.bat # Script to generate UML diagrams
 │
-├── src/ # Carpeta con archivos fuente .puml
+├── src/ # Folder with .puml source files
 │ └── *.puml
 │
-└── output/ # Carpeta para los diagramas generados
-plantuml.jar # Archivo JAR de PlantUML
-
+└── output/ # Folder for the generated diagrams
+plantuml.jar # PlantUML JAR File
 ```
 
-## Requisitos
+To add more projects, simply add a folder at the root of the project and follow a structure similar to MinaSegura/
 
-Para ejecutar este proyecto, necesitas tener instalado:
+## Requirements
+
+To execute this project, you need to have installed:
 
 - Java Runtime Environment (JRE)
 
-## Uso
+## Usage
 
-Para generar los diagramas UML, sigue estos pasos:
+To generate the UML diagrams, follow these steps:
 
-1. Coloca tus archivos `.puml` en la carpeta `src/`.
-2. Ejecuta el script `execute.bat`. Este script procesará todos los archivos `.puml` en `src/` y generará los diagramas en la carpeta `output/`.
+1. Place the files `.puml` in the folder `src/`.
+2. Execute the script `execute.bat` from the project root folder `MinaSegura/` by example. This script will process all files `.puml` in `src/` and generate the diagrams in the folder `output/`.
 
-El contenido de `execute.bat` es:
+This script looks for the plantuml.jar file in the main directory, processes the .puml files in the src/ folder, and places the generated diagrams in the output/ folder.
 
-```bat
-@ECHO OFF
-java -jar ../plantuml.jar src/*.puml -o "../output" 
-```
+## Resources and References
 
-Este script busca el archivo plantuml.jar en el directorio principal, procesa los archivos .puml en la carpeta src/ y coloca los diagramas generados en la carpeta output/.
+For more information on how to use PlantUML, visit the official [PlantUML website](https://plantuml.com/es/).
+For information on using the C4 model plugin with PlantUML, consult the GitHub repository: [C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML).
 
-## Recursos y Referencias
+## PlantUML Plugin for Visual Studio Code
 
-Para más información sobre cómo usar PlantUML, visita la página oficial de PlantUML.
-Para información sobre el uso del plugin de modelo C4 con PlantUML, consulta el repositorio en GitHub: C4-PlantUML.
+To enhance the experience of working with `.puml` files in Visual Studio Code, it is recommended to install the following plugin:
 
-## Contribuir
+- **Name:** PlantUML
+- **ID:** jebbs.plantuml
+- **Description:** Rich PlantUML support for Visual Studio Code.
+- **Version:** 2.17.5
+- **Publisher:** jebbs
+- **VS Marketplace Link:** [PlantUML - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
 
-Para contribuir a este proyecto, por favor sigue las mejores prácticas de desarrollo y mantén una buena documentación de tus cambios.
+### Installation and Use
+
+To install the PlantUML plugin in Visual Studio Code:
+
+1. Open Visual Studio Code.
+2. Go to the extensions section by searching `Ctrl+Shift+X` (or `Cmd+Shift+X` on macOS).
+3. Search for `PlantUML` by jebbs and click install.
+
+Once installed, you can visualize the UML diagrams from `.puml` files directly in Visual Studio Code:
+
+- Open a `.puml` file.
+- Press `Alt+D` to visualize the UML diagram generated from the file.
+
+This plugin is a useful tool to see the diagrams in real time while editing the `.puml` files.
+
+### Author
+
+- **Name:** Rosemberg Porras Mancilla
+- **GitHub Profile:** [rosemberg-12](https://github.com/rosemberg-12)
+
+## Contributing
+
+To contribute to this project, please follow best development practices and maintain good documentation of your changes.
