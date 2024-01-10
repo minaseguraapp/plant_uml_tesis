@@ -15,7 +15,8 @@ MinaSegura/
 ├── src/ # Folder with .puml source files
 │ └── *.puml
 │
-└── output/ # Folder for the generated diagrams
+├── output/ # Folder for the generated diagrams
+|
 plantuml.jar # PlantUML JAR File
 ```
 
@@ -67,7 +68,7 @@ Once installed, you can visualize the UML diagrams from `.puml` files directly i
 
 This plugin is a useful tool to see the diagrams in real time while editing the `.puml` files.
 
-### Author
+## Author
 
 - **Name:** Rosemberg Porras Mancilla
 - **GitHub Profile:** [rosemberg-12](https://github.com/rosemberg-12)
