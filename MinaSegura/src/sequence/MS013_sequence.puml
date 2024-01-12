@@ -1,0 +1,37 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS013
+
+actor Encargado
+participant "MinaSegura web"
+Database "MinaSegura Database"
+
+Encargado->"MinaSegura web": Solicita listado de equipos de la mina
+activate Encargado
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura Database": Consulta equipos de la mina
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web": Listados de equipos de la mina
+deactivate "MinaSegura Database"
+
+"MinaSegura web" --> Encargado: Visualiza listado de los equipos de la mina
+deactivate "MinaSegura web"
+
+Encargado->"MinaSegura web": Selecciona un equipo y asigna fecha de mantenimiento
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura Database": Registrar Mantenimiento a un equipo
+activate "MinaSegura Database"
+
+"MinaSegura Database"-->"MinaSegura web": Registro de mantenimiento exitoso
+deactivate "MinaSegura Database"
+
+"MinaSegura web"-->Encargado: Visualiza registro de mantenimiento exitoso
+deactivate "MinaSegura web"
+deactivate Encargado
+
+
+@enduml

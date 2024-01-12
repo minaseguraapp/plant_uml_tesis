@@ -1,0 +1,26 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS016
+
+actor Encargado
+participant "MinaSegura web"
+Database "MinaSegura Database"
+
+Encargado->"MinaSegura web": Consulta PDF de mantenimientos de equipo \nen rango de fecha
+activate Encargado
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura Database": Consulta mantenimientos de equipo \nen rango de fecha
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web": Listados de equipos con mantenimiento \n[Planificado, ejecutado, vencido]
+deactivate "MinaSegura Database"
+
+"MinaSegura web" --> Encargado: Obtiene archivo PDF con los equipos con mantenimiento \nEn la fecha determinada
+deactivate "MinaSegura web"
+
+deactivate Encargado
+
+
+@enduml
