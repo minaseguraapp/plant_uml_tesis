@@ -1,0 +1,43 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS019
+
+actor Administrador
+participant "MinaSegura web (Admin)"
+Database "MinaSegura Database"
+
+Administrador->"MinaSegura web (Admin)": Solicita las maquinarias de todas las \nminas y los tipos de maquinaria
+activate Administrador
+activate "MinaSegura web (Admin)"
+
+"MinaSegura web (Admin)"->"MinaSegura Database": Consulta todas las maquinarias existentes y los \ntipos de maquinaria
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web (Admin)": Listados de maquinaria y tipos de maquinaria
+deactivate "MinaSegura Database"
+
+"MinaSegura web (Admin)" --> Administrador: Visualiza las maquinarias de las minas y \ntipos de maquinaria
+deactivate "MinaSegura web (Admin)"
+
+
+Administrador->"MinaSegura web (Admin)": Crear maquinaria
+activate "MinaSegura web (Admin)"
+
+"MinaSegura web (Admin)"->"MinaSegura Database": Crear maquinaria
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web (Admin)": Maquinaria creada exitosamente
+deactivate "MinaSegura Database"
+
+"MinaSegura web (Admin)" --> Administrador: Maquinaria creada exitosamente
+deactivate "MinaSegura web (Admin)"
+
+
+
+
+
+deactivate Administrador
+
+
+@enduml
