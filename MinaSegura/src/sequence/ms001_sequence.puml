@@ -1,0 +1,35 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS001
+
+actor Encargado
+participant "MinaSegura web"
+database "MinaSegura Database"
+participant "Lambda Medicion"
+database "Tabla Medicion"
+participant "Cola de mensajes"
+
+Encargado->"MinaSegura web": Consulta listado de zonas de medicion
+activate "MinaSegura web"
+"MinaSegura web"->"MinaSegura Database":Consulta listado de zonas de medicion
+activate "MinaSegura Database"
+"MinaSegura Database"-->"MinaSegura web":retorna listado de zonas de medicion
+deactivate "MinaSegura Database"
+"MinaSegura web"-->Encargado: Lista zonas de medicion
+deactivate "MinaSegura web"
+Encargado->Encargado: Selecciona zona en la cual \n registrara la medicion
+Encargado->"MinaSegura web": Ingresa datos de polvo de carbon a registrar
+activate "MinaSegura web"
+"MinaSegura web"->"Lambda Medicion": Envia datos de medicion de \n polvo de carbon a registrar
+activate "Lambda Medicion"
+"Lambda Medicion"->"Tabla Medicion": Guarga registro de la medicion
+activate "Tabla Medicion"
+"Tabla Medicion"-->"Lambda Medicion": Confirma guardado
+deactivate "Tabla Medicion"
+"Lambda Medicion"->"Cola de mensajes": Emite evento de medicion registrada
+"Lambda Medicion"-->"MinaSegura web": Retorna estado del registro
+deactivate "Lambda Medicion"
+"MinaSegura web"-->Encargado:Informa estado del registro
+deactivate "MinaSegura web"
+@enduml
