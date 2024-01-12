@@ -1,4 +1,4 @@
-@startuml hu1_sequence
+@startuml ms002_sequence
 autonumber
 
 title Diagrama del secuencia de la historia MS001

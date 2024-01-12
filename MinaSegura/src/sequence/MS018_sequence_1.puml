@@ -1,0 +1,26 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS018
+
+actor Administrador
+participant "MinaSegura web (Admin)"
+Database "MinaSegura Database"
+
+Administrador->"MinaSegura web (Admin)": Solicita las zonas de todas la mina\n y los tipos de zona
+activate Administrador
+activate "MinaSegura web (Admin)"
+
+"MinaSegura web (Admin)"->"MinaSegura Database": Consulta todas las zonas de minas\n y los tipos de zona
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web (Admin)": Listados zonas y tipos de zona
+deactivate "MinaSegura Database"
+
+"MinaSegura web (Admin)" --> Administrador: Visualiza las zonas y tipos de zona
+deactivate "MinaSegura web (Admin)"
+
+deactivate Administrador
+
+
+@enduml
