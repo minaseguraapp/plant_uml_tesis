@@ -1,0 +1,28 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS021
+
+actor Encargado
+participant "MinaSegura web"
+Database "MinaSegura Database"
+
+Encargado->"MinaSegura web": realiza solicitud de inicio de sesion como Encargado
+activate Encargado
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura Database": Consulta informacion del usuario Encargado
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web": Retorna informacion del usuario Encargado
+deactivate "MinaSegura Database"
+"MinaSegura web"->"MinaSegura web": Valida informacion del usuario Encargado
+
+
+"MinaSegura web" --> Encargado: Redirige a pagina de administracion
+deactivate "MinaSegura web"
+
+deactivate Encargado
+
+
+@enduml
