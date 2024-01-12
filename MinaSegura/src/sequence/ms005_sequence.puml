@@ -1,0 +1,23 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS005
+
+actor Encargado
+participant "MinaSegura web"
+participant "Lambda Medicion"
+database "Tabla Medicion"
+
+Encargado->"MinaSegura web": Selecciona ver graficos de las \nmediciones de polvo de carbon
+activate "MinaSegura web"
+"MinaSegura web"->"Lambda Medicion": Envia datos de elementos a consultar
+activate "Lambda Medicion"
+"Lambda Medicion"->"Tabla Medicion": Conlulta mediciones de polvo de carbon
+activate "Tabla Medicion"
+"Tabla Medicion"-->"Lambda Medicion": Retorna mediciones de polvo de carbon
+deactivate "Tabla Medicion"
+"Lambda Medicion"-->"MinaSegura web": Retorna mediciones de polvo de carbon
+deactivate "Lambda Medicion"
+"MinaSegura web"-->Encargado:Muestra graficas de las mediciones \nde polvo de carbon
+deactivate "MinaSegura web"
+@enduml

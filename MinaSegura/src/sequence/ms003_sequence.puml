@@ -1,0 +1,34 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS003
+
+participant "Cola de mensajes"
+participant "Lambda Alerta"
+database "Tabla Configuracion Alerta"
+database "Tabla Alerta"
+participant "Lambda Notificacion"
+participant "Servicio de Notificaciones"
+actor Encargado
+
+"Cola de mensajes"-->"Lambda Alerta": Recibe evento de medicion registrada
+activate "Lambda Alerta"
+"Lambda Alerta"->"Tabla Configuracion Alerta": Consulta valores de referencia
+activate "Tabla Configuracion Alerta"
+"Tabla Configuracion Alerta"-->"Lambda Alerta": retorna valores de referencia
+deactivate "Tabla Configuracion Alerta"
+"Lambda Alerta"->"Tabla Alerta": Guarda alerta generada
+activate "Tabla Alerta"
+"Tabla Alerta"-->"Lambda Alerta": Confirma guardado de la alerta
+deactivate "Tabla Alerta"
+"Lambda Alerta"->"Cola de mensajes": Emite evento de alerta registrada
+deactivate "Lambda Alerta"
+"Cola de mensajes"-->"Lambda Notificacion": Recibe evento de alerta registrada
+activate "Lambda Notificacion"
+"Lambda Notificacion"->"Servicio de Notificaciones": Envia informacion a \nmostrar en la notificacion
+deactivate "Lambda Notificacion"
+activate "Servicio de Notificaciones"
+"Servicio de Notificaciones"->Encargado:Realiza notificacion
+deactivate "Servicio de Notificaciones"
+
+@enduml
