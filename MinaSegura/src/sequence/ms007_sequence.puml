@@ -1,7 +1,7 @@
 @startuml hu1_sequence
 autonumber
 
-title Diagrama del secuencia de la historia MS001
+title Diagrama del secuencia de la historia MS007
 
 actor Encargado
 participant "MinaSegura web"
@@ -19,9 +19,9 @@ deactivate "MinaSegura Database"
 "MinaSegura web"-->Encargado: Lista zonas de medicion
 deactivate "MinaSegura web"
 Encargado->Encargado: Selecciona zona en la cual \n registrara la medicion
-Encargado->"MinaSegura web": Ingresa datos de polvo de carbon a registrar
+Encargado->"MinaSegura web": Ingresa datos de gas metano a registrar
 activate "MinaSegura web"
-"MinaSegura web"->"Lambda Medicion": Envia datos de medicion de \n polvo de carbon a registrar
+"MinaSegura web"->"Lambda Medicion": Envia datos de medicion de \n gas metano a registrar
 activate "Lambda Medicion"
 "Lambda Medicion"->"Tabla Medicion": Guarga registro de la medicion
 activate "Tabla Medicion"
