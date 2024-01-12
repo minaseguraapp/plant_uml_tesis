@@ -1,0 +1,26 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS014
+
+actor Encargado
+participant "MinaSegura web"
+Database "MinaSegura Database"
+
+Encargado->"MinaSegura web": Solicita equipos de la mina con mantenimiento vencidos
+activate Encargado
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura Database": Consulta equipos de la mina con mantenimiento vencidos
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web": Listados de equipos con mantenimiento vencidos
+deactivate "MinaSegura Database"
+
+"MinaSegura web" --> Encargado: Visualiza equipos de la mina con manteniemiento vencidos
+deactivate "MinaSegura web"
+
+deactivate Encargado
+
+
+@enduml

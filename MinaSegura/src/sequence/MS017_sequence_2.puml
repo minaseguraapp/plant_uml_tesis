@@ -1,0 +1,40 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS017
+
+actor Administrador
+participant "MinaSegura web (Admin)"
+Database "MinaSegura Database"
+
+Administrador->"MinaSegura web (Admin)": Consulta las minas del sistema
+activate Administrador
+activate "MinaSegura web (Admin)"
+
+"MinaSegura web (Admin)"->"MinaSegura Database": Consulta todas las minas del sistema
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web (Admin)": Listados de minas del sistema
+deactivate "MinaSegura Database"
+
+"MinaSegura web (Admin)" --> Administrador: Visualiza las minas del sistema
+deactivate "MinaSegura web (Admin)"
+
+Administrador->"MinaSegura web (Admin)": Selecciona mina para visualizar informacion
+activate "MinaSegura web (Admin)"
+
+"MinaSegura web (Admin)"->"MinaSegura Database": Consulta la informacion de la mina \nseleccionada
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web (Admin)": Informacion de la mina
+deactivate "MinaSegura Database"
+
+"MinaSegura web (Admin)" --> Administrador: Visualiza la informacion de la mina
+deactivate "MinaSegura web (Admin)"
+
+
+
+deactivate Administrador
+
+
+@enduml

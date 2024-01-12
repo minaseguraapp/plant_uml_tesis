@@ -21,8 +21,8 @@ Rel_R(encargado_mina, web_api, "Consume", "HTTPS")
 Rel_R(admin, web_api, "Consume", "HTTPS")
 Rel(web_api, web_lambda, "Consume", "HTTPS")
 Rel_L(web_lambda, web_db, "Lee y escribe", "SDK")
-Rel(web_lambda, private_api_medicion, "Produce eventos", "SDK")
-Rel(web_lambda, private_api_alertas, "Produce eventos", "SDK")
-Rel(web_lambda, private_api_notificacion, "Produce eventos", "SDK")
+Rel(web_lambda, private_api_medicion, "Consume", "HTTPS")
+Rel(web_lambda, private_api_alertas, "Consume", "HTTPS")
+Rel(web_lambda, private_api_notificacion, "Consume", "HTTPS")
 
 @enduml

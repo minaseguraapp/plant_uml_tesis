@@ -1,0 +1,26 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS015
+
+actor Encargado
+participant "MinaSegura web"
+Database "MinaSegura Database"
+
+Encargado->"MinaSegura web": Solicita informacion del dashboard
+activate Encargado
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura Database": Consulta equipos con mantenimientos proximos
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web": Listados de equipos con mantenimiento proximos
+deactivate "MinaSegura Database"
+
+"MinaSegura web" --> Encargado: Visualiza dashboard con alertas de mantenimientos proximos
+deactivate "MinaSegura web"
+
+deactivate Encargado
+
+
+@enduml
