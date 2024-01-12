@@ -1,0 +1,22 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS025
+
+actor Encargado
+participant "MinaSegura web"
+
+Encargado->"MinaSegura web": realiza solicitud de cierre de sesion como Encargado
+activate Encargado
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura web": Cierra sesion del usuario Encargado
+
+
+"MinaSegura web" --> Encargado: Redirige a pagina de inicio de sesion
+deactivate "MinaSegura web"
+
+deactivate Encargado
+
+
+@enduml

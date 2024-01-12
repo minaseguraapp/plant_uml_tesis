@@ -1,0 +1,28 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS024
+
+actor Administrador
+participant "MinaSegura web"
+Database "MinaSegura Database"
+
+Administrador->"MinaSegura web": realiza solicitud de inicio de sesion como administrador
+activate Administrador
+activate "MinaSegura web"
+
+"MinaSegura web"->"MinaSegura Database": Consulta informacion del usuario administrador
+activate "MinaSegura Database"
+
+"MinaSegura Database" --> "MinaSegura web": Retorna informacion del usuario administrador
+deactivate "MinaSegura Database"
+"MinaSegura web"->"MinaSegura web": Valida informacion del usuario administrador
+
+
+"MinaSegura web" --> Administrador: Redirige a pagina de administracion
+deactivate "MinaSegura web"
+
+deactivate Administrador
+
+
+@enduml
