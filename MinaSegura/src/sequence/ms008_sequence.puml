@@ -1,0 +1,23 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS008
+
+actor Encargado
+participant "MinaSegura web"
+participant "Lambda Medicion"
+database "Tabla Medicion"
+
+Encargado->"MinaSegura web": Ingresa valores de filtrado para la busqueda
+activate "MinaSegura web"
+"MinaSegura web"->"Lambda Medicion": Envia datos de elementos a consultar
+activate "Lambda Medicion"
+"Lambda Medicion"->"Tabla Medicion": Conlulta mediciones de gas metano
+activate "Tabla Medicion"
+"Tabla Medicion"-->"Lambda Medicion": Retorna mediciones de gas metano
+deactivate "Tabla Medicion"
+"Lambda Medicion"-->"MinaSegura web": Retorna mediciones de gas metano
+deactivate "Lambda Medicion"
+"MinaSegura web"-->Encargado:Muestra mediciones de gas metano
+deactivate "MinaSegura web"
+@enduml

@@ -1,0 +1,23 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS010
+
+actor Encargado
+participant "MinaSegura web"
+participant "Lambda Alerta"
+database "Tabla Configuracion Alerta"
+
+Encargado->"MinaSegura web": Ingresa valores de referencia de \ngas metano para posibles alertas
+activate "MinaSegura web"
+"MinaSegura web"->"Lambda Alerta": Envia valores de referencia \nde gas metano a guardar
+activate "Lambda Alerta"
+"Lambda Alerta"->"Tabla Configuracion Alerta": Guarda valores de referencia \n de gas metano
+activate "Tabla Configuracion Alerta"
+"Tabla Configuracion Alerta"-->"Lambda Alerta": Retorna confirmacion de guardado
+deactivate "Tabla Configuracion Alerta"
+"Lambda Alerta"-->"MinaSegura web": Retorna confirmacion de guardado
+deactivate "Lambda Alerta"
+"MinaSegura web"-->Encargado:Informa estado del registro
+deactivate "MinaSegura web"
+@enduml

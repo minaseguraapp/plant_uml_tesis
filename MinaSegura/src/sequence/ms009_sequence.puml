@@ -1,7 +1,7 @@
 @startuml hu1_sequence
 autonumber
 
-title Diagrama del secuencia de la historia MS003
+title Diagrama del secuencia de la historia MS009
 
 participant "Cola de mensajes"
 participant "Lambda Alerta"
@@ -11,11 +11,11 @@ participant "Lambda Notificacion"
 participant "Servicio de Notificaciones"
 actor Encargado
 
-"Cola de mensajes"-->"Lambda Alerta": Recibe evento de medicion de \npolvo de carbon registrada
+"Cola de mensajes"-->"Lambda Alerta": Recibe evento de medicion de \ngas metano registrada
 activate "Lambda Alerta"
-"Lambda Alerta"->"Tabla Configuracion Alerta": Consulta valores de referencia de polvo de carbon
+"Lambda Alerta"->"Tabla Configuracion Alerta": Consulta valores de referencia de gas metano
 activate "Tabla Configuracion Alerta"
-"Tabla Configuracion Alerta"-->"Lambda Alerta": retorna valores de referencia de polvo de carbon
+"Tabla Configuracion Alerta"-->"Lambda Alerta": retorna valores de referencia de gas metano
 deactivate "Tabla Configuracion Alerta"
 "Lambda Alerta"->"Tabla Alerta": Guarda alerta generada
 activate "Tabla Alerta"

@@ -1,0 +1,23 @@
+@startuml hu1_sequence
+autonumber
+
+title Diagrama del secuencia de la historia MS012
+
+actor Encargado
+participant "MinaSegura web"
+participant "Lambda Medicion"
+database "Tabla Medicion"
+
+Encargado->"MinaSegura web": Selecciona descargar reporte de las \nmediciones de gas metano
+activate "MinaSegura web"
+"MinaSegura web"->"Lambda Medicion": Envia datos de elementos a consultar
+activate "Lambda Medicion"
+"Lambda Medicion"->"Tabla Medicion": Conlulta mediciones de gas metano
+activate "Tabla Medicion"
+"Tabla Medicion"-->"Lambda Medicion": Retorna mediciones de gas metano
+deactivate "Tabla Medicion"
+"Lambda Medicion"-->"MinaSegura web": Retorna mediciones de gas metano
+deactivate "Lambda Medicion"
+"MinaSegura web"-->Encargado:Genera documento PDF de las \nmediciones de gas metano
+deactivate "MinaSegura web"
+@enduml
